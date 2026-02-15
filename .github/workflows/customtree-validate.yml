@@ -1,0 +1,22 @@
+name: CustomTree Validate
+
+on:
+  pull_request:
+    branches: [main, dev]
+  push:
+    branches: [dev, 'feature/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  customtree-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate required module files
+        run: |
+          test -f manifest.json
+          test -d Common
+          test -d Server
